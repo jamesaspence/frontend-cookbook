@@ -22,8 +22,14 @@ export const cookbookApi = createApi({
         method: 'POST',
         body
       })
-    })
+    }),
+    getMe: builder.query({
+      query: () => ({
+        url: 'me',
+        method: 'GET',
+      })
+    }),
   })
 });
 
-export const { useLoginUserMutation } = cookbookApi;
+export const { useLoginUserMutation, useGetMeQuery } = cookbookApi;
