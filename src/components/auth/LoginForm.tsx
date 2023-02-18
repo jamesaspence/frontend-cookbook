@@ -1,15 +1,20 @@
 'use client';
 
 import {ChangeEvent, FormEvent, useState} from 'react';
+import {useLoginUserMutation} from '@/redux/cookbookApi';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [login] = useLoginUserMutation();
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     console.log('login', email, password);
+    const status = await login({email, password});
+
+    console.log(status);
   }
 
   return (
