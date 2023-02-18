@@ -1,7 +1,13 @@
-import {wrapper} from '../redux/store';
+import {wrapper} from '@/redux/store';
+import {AppProps} from 'next/app';
+import {Provider} from 'react-redux';
 
-export function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+export default function App({ Component, pageProps }: AppProps) {
+  const { store } = wrapper.useWrappedStore(pageProps);
+
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
-
-export default wrapper.withRedux(App);
