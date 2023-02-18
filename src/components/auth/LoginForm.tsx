@@ -1,7 +1,7 @@
 'use client';
 
 import {ChangeEvent, FormEvent, useState} from 'react';
-import {useLoginUserMutation} from '@/redux/cookbookApi';
+import {useLoginUserMutation} from '@/redux/services/cookbookApi';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');

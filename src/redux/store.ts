@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { cookbookApi } from '@/redux/cookbookApi';
+import { cookbookApi } from '@/redux/services/cookbookApi';
 
 export const makeStore = () =>
   configureStore({
