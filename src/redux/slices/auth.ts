@@ -36,6 +36,10 @@ const authSlice = createSlice({
     },
     setToken: (state: AuthState, action: PayloadAction<string>) => {
       state.token = action.payload;
+    },
+    clearAuth: (state: AuthState, action: PayloadAction) => {
+      state.token = null;
+      state.user = null;
     }
   },
   extraReducers: {
@@ -48,7 +52,7 @@ const authSlice = createSlice({
   }
 });
 
-export const { setToken, setUser } = authSlice.actions;
+export const { setToken, setUser, clearAuth } = authSlice.actions;
 
 const selectRawToken = (state: RootState) => state.auth.token;
 export const selectUser = (state: RootState) => state.auth.user;
