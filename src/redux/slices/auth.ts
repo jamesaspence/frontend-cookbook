@@ -1,12 +1,20 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Nullable} from '@/types';
 import {HYDRATE} from 'next-redux-wrapper';
+import {RootState} from '@/redux/store';
+import jwtDecode from 'jwt-decode';
 
 export type User = {
   id: number;
   email: string;
   first_name: string;
   last_name: string;
+}
+
+export type DecodedJWT = {
+  iat: number;
+  exp: number;
+  sub: number;
 }
 
 export interface AuthState {
@@ -41,5 +49,23 @@ const authSlice = createSlice({
 });
 
 export const { setToken, setUser } = authSlice.actions;
+
+const selectRawToken = (state: RootState) => state.auth.token;
+export const selectUser = (state: RootState) => state.auth.user;
+export const selectToken = createSelector(
+  selectRawToken,
+  token => {
+    if (!token) {
+      return null;
+    }
+
+    try {
+      return jwtDecode<DecodedJWT>(token);
+    } catch (err) {
+      console.error('Unable to decode JWT', err);
+      return null;
+    }
+  }
+);
 
 export default authSlice.reducer;
