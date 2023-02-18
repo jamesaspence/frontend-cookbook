@@ -1,5 +1,5 @@
 import {wrapper} from '@/redux/store';
-import {DecodedJWT, selectToken, selectUser, User} from '@/redux/slices/auth';
+import {clearAuth, DecodedJWT, selectToken, selectUser, User} from '@/redux/slices/auth';
 import {Nullable} from '@/types';
 import {cookbookApi} from '@/redux/services/cookbookApi';
 
@@ -14,6 +14,10 @@ export const withAuth = wrapper.getServerSideProps(store => async () => {
   const token = selectToken(state);
 
   if (!tokenIsValid(token)) {
+    if (token) {
+      await store.dispatch(clearAuth());
+    }
+
     return {
       redirect: {
         destination: '/login',
@@ -26,6 +30,7 @@ export const withAuth = wrapper.getServerSideProps(store => async () => {
   await Promise.all(store.dispatch(cookbookApi.util.getRunningQueriesThunk()));
 
   if (meResp.isError) {
+    await store.dispatch(clearAuth());
     return {
       redirect: {
         destination: '/login',
