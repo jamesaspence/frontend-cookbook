@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {createWrapper, HYDRATE} from "next-redux-wrapper";
+import {createWrapper} from "next-redux-wrapper";
 import { cookbookApi } from '@/redux/services/cookbookApi';
 import authReducer from '@/redux/slices/auth';
 import { nextReduxCookieMiddleware, wrapMakeStore } from 'next-redux-cookie-wrapper';
