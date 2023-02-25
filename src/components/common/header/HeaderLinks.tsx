@@ -21,8 +21,18 @@ export default function HeaderLinks() {
   return (
     <>
       <>
-        <Link href="/login">Login</Link>
-        <Link href="/register">Sign Up</Link>
+        {
+          token ? (
+            <>
+              <div onClick={onLogout}>Logout</div>
+            </>
+          ) : (
+            <>
+              <Link href="/login">Login</Link>
+              <Link href="/register">Sign Up</Link>
+            </>
+          )
+        }
       </>
     </>
   );
