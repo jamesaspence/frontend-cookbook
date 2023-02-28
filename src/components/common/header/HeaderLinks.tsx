@@ -1,5 +1,3 @@
-'use client';
-
 import {DecodedJWT} from '@/redux/slices/auth';
 import Link from 'next/link';
 import {MouseEvent} from 'react';
