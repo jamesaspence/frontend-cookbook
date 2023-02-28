@@ -8,6 +8,13 @@ export type WithAuthProps = {
   token: DecodedJWT;
 };
 
+const mapUserAndTokenToProps = (token: DecodedJWT, user: User) => ({
+  props: {
+    user,
+    token
+  }
+});
+
 export const withAuth = wrapper.getServerSideProps(store => async () => {
   const state = store.getState();
 
@@ -39,12 +46,10 @@ export const withAuth = wrapper.getServerSideProps(store => async () => {
     };
   }
 
-  return {
-    props: {
-      user: selectUser(state),
-      token,
-    }
-  };
+  return mapUserAndTokenToProps(
+    token as DecodedJWT,
+    selectUser(state) as User
+  );
 });
 
 export const tokenIsValid = (token: Nullable<DecodedJWT>): boolean => {
