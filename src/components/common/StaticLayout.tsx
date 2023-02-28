@@ -1,13 +1,15 @@
 import Header from '@/components/common/header/Header';
 import {ReactNode} from 'react';
 
-export default function Layout({ children }: {
+
+
+export default function StaticLayout({ children }: {
   children: ReactNode
 }) {
   return (
     <>
-      <Header/>
+      <Header token={null}/>
       {children}
     </>
-  )
+  );
 }

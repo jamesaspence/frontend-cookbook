@@ -1,5 +1,5 @@
-import {DecodedJWT} from '@/redux/slices/auth';
 import {withAuth, WithAuthProps} from '@/util/auth/withAuth';
+import {withAppLayout} from '@/util/auth/withLayout';
 
 export type SecureProps = WithAuthProps;
 
@@ -11,5 +11,7 @@ export default function Secure({ token }: SecureProps) {
     </div>
   );
 }
+
+Secure.getLayout = withAppLayout;
 
 export const getServerSideProps = withAuth;

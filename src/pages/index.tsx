@@ -1,3 +1,5 @@
+import {withStaticLayout} from '@/util/auth/withLayout';
+
 export default function Home() {
   return (
     <main>
@@ -5,3 +7,5 @@ export default function Home() {
     </main>
   )
 }
+
+Home.getLayout = withStaticLayout;

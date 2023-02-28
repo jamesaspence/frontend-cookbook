@@ -1,4 +1,5 @@
 import AuthForm from '@/components/auth/AuthForm';
+import {withStaticLayout} from '@/util/auth/withLayout';
 
 export default function Login() {
   return (
@@ -7,3 +8,5 @@ export default function Login() {
     </main>
   )
 }
+
+Login.getLayout = withStaticLayout;
