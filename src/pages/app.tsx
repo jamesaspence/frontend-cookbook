@@ -3,7 +3,7 @@ import {withAppLayout} from '@/util/auth/withLayout';
 
 export type SecureProps = WithAuthProps;
 
-export default function Secure({ token }: SecureProps) {
+export default function App({ token }: SecureProps) {
   return (
     <div>
       <h1>Welcome</h1>
@@ -12,6 +12,6 @@ export default function Secure({ token }: SecureProps) {
   );
 }
 
-Secure.getLayout = withAppLayout;
+App.getLayout = withAppLayout;
 
 export const getServerSideProps = withAuth;
