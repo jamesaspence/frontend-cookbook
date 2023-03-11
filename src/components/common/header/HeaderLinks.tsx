@@ -1,17 +1,14 @@
-import {clearAuth, DecodedJWT} from '@/redux/slices/auth';
+import {clearAuth, selectToken} from '@/redux/slices/auth';
 import Link from 'next/link';
 import {MouseEvent} from 'react';
-import {Nullable} from '@/types';
-import {useAppDispatch} from '@/redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {useRouter} from 'next/router';
 
-type HeaderLinksProps = {
-  token: Nullable<DecodedJWT>;
-};
-
-export default function HeaderLinks({ token = null }: HeaderLinksProps) {
+export default function HeaderLinks() {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const token = useAppSelector(selectToken);
 
   const onLogout = async (e: MouseEvent) => {
     e.preventDefault();

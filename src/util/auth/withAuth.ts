@@ -1,4 +1,4 @@
-import {wrapper} from '@/redux/store';
+import {AppStore, wrapper} from '@/redux/store';
 import {clearAuth, DecodedJWT, selectToken, selectUser, User} from '@/redux/slices/auth';
 import {Nullable} from '@/types';
 import {cookbookApi} from '@/redux/services/cookbookApi';
@@ -10,21 +10,26 @@ export type WithAuthProps = {
 
 const mapUserAndTokenToProps = (token: DecodedJWT, user: User) => ({
   props: {
-    user,
-    token
+    token,
+    user
   }
 });
 
 export const withAuth = wrapper.getServerSideProps(store => async () => {
+  const token = await getTokenFromStore(store);
+
+  return mapUserAndTokenToProps(
+    token as DecodedJWT,
+    selectUser(store.getState()) as User
+  );
+});
+
+export const withAuthRedirect = wrapper.getServerSideProps(store => async () => {
   const state = store.getState();
 
-  const token = selectToken(state);
+  const token = await getTokenFromStore(store);
 
-  if (!tokenIsValid(token)) {
-    if (token) {
-      await store.dispatch(clearAuth());
-    }
-
+  if (!token) {
     return {
       redirect: {
         destination: '/login',
@@ -51,6 +56,22 @@ export const withAuth = wrapper.getServerSideProps(store => async () => {
     selectUser(state) as User
   );
 });
+
+const getTokenFromStore = async (store: AppStore): Promise<Nullable<DecodedJWT>> => {
+  const state = store.getState();
+
+  const token = selectToken(state);
+
+  if (!tokenIsValid(token)) {
+    if (token) {
+      await store.dispatch(clearAuth());
+    }
+
+    return null;
+  }
+
+  return token;
+}
 
 export const tokenIsValid = (token: Nullable<DecodedJWT>): boolean => {
   if (!token) {

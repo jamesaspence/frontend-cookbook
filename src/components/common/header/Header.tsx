@@ -1,13 +1,12 @@
-import HeaderLinks from '@/components/common/header/HeaderLinks';
 import {Nullable} from '@/types';
 import {DecodedJWT} from '@/redux/slices/auth';
 import Link from 'next/link';
+import NoSSRHeaderLinks from '@/components/common/header/NoSSRHeaderLinks';
 
 type HeaderProps = {
-  token: Nullable<DecodedJWT>;
 }
 
-export default function Header({ token = null }: HeaderProps) {
+export default function Header() {
 
   return (
     <div className="header">
@@ -17,7 +16,7 @@ export default function Header({ token = null }: HeaderProps) {
         </Link>
       </div>
       <div className="headerRight">
-        <HeaderLinks token={token}/>
+        <NoSSRHeaderLinks/>
       </div>
     </div>
   );

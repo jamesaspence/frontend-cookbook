@@ -5,6 +5,7 @@ import {useLoginUserMutation} from '@/redux/services/cookbookApi';
 import {useAppDispatch} from '@/redux/hooks';
 import {setToken, setUser} from '@/redux/slices/auth';
 import {useRouter} from 'next/router';
+import {routes} from '@/util/routes';
 
 
 export default function LoginForm() {
@@ -22,7 +23,7 @@ export default function LoginForm() {
       const data = await login({email, password}).unwrap();
       dispatch(setToken(data.token));
       dispatch(setUser(data));
-      await router.push('/secure');
+      await router.push(routes.home);
       console.log('data', data);
     } catch (err) {
       console.error('login failure', err);

@@ -3,6 +3,7 @@ import {AppProps} from 'next/app';
 import {Provider} from 'react-redux';
 import {ComponentType, ReactNode} from 'react';
 import {NextPage} from 'next';
+import AppLayout from '@/components/common/AppLayout';
 
 type Page<P = {}> = NextPage<P> & {
   // You can disable whichever you don't need
@@ -21,7 +22,9 @@ export default function App({ Component, pageProps }: LayoutAppProps) {
 
   return (
     <Provider store={store}>
-      {getLayout(<Component {...pageProps}/>)}
+      <AppLayout>
+        {getLayout(<Component {...pageProps}/>)}
+      </AppLayout>
     </Provider>
   );
 }

@@ -6,11 +6,9 @@ import {selectToken} from '@/redux/slices/auth';
 export default function AppLayout({ children }: {
   children: ReactNode
 }) {
-  const token = useAppSelector(selectToken);
-
   return (
     <>
-      <Header token={token}/>
+      <Header/>
       {children}
     </>
   )
