@@ -20,5 +20,5 @@ export default function Header({ token = null }: HeaderProps) {
         <HeaderLinks token={token}/>
       </div>
     </div>
-  )
+  );
 }
