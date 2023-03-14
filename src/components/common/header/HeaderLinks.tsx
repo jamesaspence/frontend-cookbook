@@ -3,8 +3,9 @@ import Link from 'next/link';
 import {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {useRouter} from 'next/router';
+import dynamic from 'next/dynamic';
 
-export default function HeaderLinks() {
+function HeaderLinks() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -37,3 +38,7 @@ export default function HeaderLinks() {
     </>
   );
 }
+
+export default dynamic(() => Promise.resolve(HeaderLinks), {
+  ssr: false
+});
