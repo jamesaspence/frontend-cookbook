@@ -44,7 +44,6 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log('HYDRATE REDUCER RUNNING', action.payload.auth);
       return {
         ...state,
         ...action.payload.auth,
