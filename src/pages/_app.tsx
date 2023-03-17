@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {ComponentType, ReactNode} from 'react';
 import {NextPage} from 'next';
 import AppLayout from '@/components/common/AppLayout';
+import './_app.scss';
 
 type Page<P = {}> = NextPage<P> & {
   // You can disable whichever you don't need
