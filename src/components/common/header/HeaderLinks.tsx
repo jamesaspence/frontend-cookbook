@@ -1,9 +1,10 @@
 import {clearAuth, selectToken} from '@/redux/slices/auth';
-import Link from 'next/link';
 import {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {useRouter} from 'next/router';
 import dynamic from 'next/dynamic';
+import styles from './headerLinks.module.scss';
+import HeaderLink from '@/components/common/header/HeaderLink';
 
 function HeaderLinks() {
   const dispatch = useAppDispatch();
@@ -20,22 +21,20 @@ function HeaderLinks() {
   }
 
   return (
-    <>
-      <>
-        {
-          token ? (
-            <>
-              <div onClick={onLogout}>Logout</div>
-            </>
-          ) : (
-            <>
-              <Link href="/login">Login</Link>
-              <Link href="/register">Sign Up</Link>
-            </>
-          )
-        }
-      </>
-    </>
+    <ul className={styles.headerLinks}>
+      {
+        token ? (
+          <li>
+            <div onClick={onLogout}>Logout</div>
+          </li>
+        ) : (
+          <>
+            <HeaderLink href="/login">Login</HeaderLink>
+            <HeaderLink href="/register">Sign Up</HeaderLink>
+          </>
+        )
+      }
+    </ul>
   );
 }
 

@@ -1,15 +1,14 @@
 import Header from '@/components/common/header/Header';
 import {ReactNode} from 'react';
-import {useAppSelector} from '@/redux/hooks';
-import {selectToken} from '@/redux/slices/auth';
+import styles from './appLayout.module.scss';
 
 export default function AppLayout({ children }: {
   children: ReactNode
 }) {
   return (
-    <>
+    <section className={styles.container}>
       <Header/>
       {children}
-    </>
+    </section>
   )
 }
