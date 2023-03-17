@@ -1,9 +1,13 @@
-import AuthForm from '@/components/auth/AuthForm';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
+import RegisterForm from '@/components/auth/RegisterForm';
+import {ReactNode} from 'react';
 
-export default function Login() {
+export default function Register() {
   return (
-    <main>
-      <AuthForm/>
-    </main>
+    <AuthPageWrapper>
+      <RegisterForm/>
+    </AuthPageWrapper>
   )
 }
+
+// Register.getLayout = (page: ReactNode) => page;

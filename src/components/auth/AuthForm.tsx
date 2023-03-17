@@ -1,11 +1,15 @@
-'use client';
+import {FormEventHandler, ReactNode} from 'react';
+import styles from './authForm.module.scss';
 
-import LoginForm from '@/components/auth/LoginForm';
+type AuthFormProps = {
+  onSubmit: FormEventHandler;
+  children: ReactNode;
+};
 
-export default function AuthForm() {
+export default function AuthForm({ children, onSubmit }: AuthFormProps) {
   return (
-    <div>
-      <LoginForm/>
-    </div>
-  );
+    <form className={styles.authForm} onSubmit={onSubmit}>
+      {children}
+    </form>
+  )
 }

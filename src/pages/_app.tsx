@@ -19,13 +19,15 @@ type LayoutAppProps = AppProps & {
 export default function App({ Component, pageProps }: LayoutAppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
 
-  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => (
+    <AppLayout>
+      {page}
+    </AppLayout>
+  ));
 
   return (
     <Provider store={store}>
-      <AppLayout>
-        {getLayout(<Component {...pageProps}/>)}
-      </AppLayout>
+      {getLayout(<Component {...pageProps}/>)}
     </Provider>
   );
 }

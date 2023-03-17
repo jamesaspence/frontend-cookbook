@@ -6,6 +6,8 @@ import {useAppDispatch} from '@/redux/hooks';
 import {setToken, setUser} from '@/redux/slices/auth';
 import {useRouter} from 'next/router';
 import {routes} from '@/util/routes';
+import AuthForm from '@/components/auth/AuthForm';
+import AuthInput from '@/components/auth/AuthInput';
 
 
 export default function LoginForm() {
@@ -33,11 +35,11 @@ export default function LoginForm() {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <input type="text" name="email" onChange={e => setEmail(e.target.value)} placeholder="Email"/>
-        <input type="password" name="password" onChange={e => setPassword(e.target.value)} placeholder="Password"/>
+      <AuthForm onSubmit={onSubmit}>
+        <AuthInput type="text" name="email" onChange={e => setEmail(e.target.value)} placeholder="Email"/>
+        <AuthInput type="password" name="password" onChange={e => setPassword(e.target.value)} placeholder="Password"/>
         <button type="submit">Login</button>
-      </form>
+      </AuthForm>
     </div>
   );
 }
